@@ -1,0 +1,40 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chtitedev
+  labels:
+    app: chtitedev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: chtitedev
+  template:
+    metadata:
+      labels:
+        app: chtitedev
+    spec:
+      #pour forcer le container a tourné avec l'user 1001.
+      securityContext:
+        runAsUser: 1001
+      containers:
+        - name: chtitedev
+          image: "dockerld/foo:latest"
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5000
+          #exemple ici. En prod, mettre un path simple, différent des paths applicatifs, avec retour nom de l'app par ex et surtout avec aucune dépendance.
+          #pour tester si l'app a démarré.
+          livenessProbe:
+            httpGet:
+              path: /foo
+              port: 5000
+          #exemple ici. En prod, mettre un path simple, différent des paths applicatifs.
+          #pour tester si l'app peut recevoir du trafic.
+          readinessProbe:
+            httpGet:
+              path: /foo
+              port: 5000
+          resources:
+            {}

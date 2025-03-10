@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: whoami
+  name: chtitedev
 spec:
   rules:
     - host: chtitedev.192.168.49.2.sslip.io

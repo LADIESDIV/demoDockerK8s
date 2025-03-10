@@ -62,4 +62,4 @@ Maintenant que l'application foo est dans votre registry, nous allons l'utiliser
 
    --> ```kubectl apply -f ingress.yaml``` et ```kubectl apply -f svcNodeport.yaml``` 
 
-   --> ```curl $(minikube ip)```
+   --> ```curl http://chtitedev.$(minikube ip).sslip.io/foo``` et ```curl $(minikube ip):$port/foo``` 
